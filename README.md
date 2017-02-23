@@ -1,2 +1,2 @@
 # erNail.github.io
-Github Pages User site
+Github Pages User site repository for erNail
