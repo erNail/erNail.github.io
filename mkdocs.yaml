@@ -1,0 +1,48 @@
+---
+site_name: "erNail.github.io"
+site_author: "Eric Nagel"
+site_description: "Static site illuminating my thoughts on Site Reliability, DevOps and Software Engineering"
+
+repo_name: "erNail/erNail.github.io"
+repo_url: "https://github.com/erNail/erNail.github.io"
+
+# Copyright
+copyright: "Copyright &copy; 2016 - 2023 Eric Nagel"
+
+theme:
+  name: "material"
+  palette:
+    scheme: "slate"
+    primary: "teal"
+  features:
+    - "navigation.instant"
+    - "navigation.tracking"
+    - "navigation.sections"
+
+markdown_extensions:
+  - "attr_list"
+  - "md_in_html"
+
+extra:
+  social:
+    - icon: "fontawesome/brands/github"
+      link: "https://github.com/erNail/"
+    - icon: "fontawesome/brands/linkedin"
+      link: "https://www.linkedin.com/in/eric-nagel/"
+
+
+nav:
+  - Home: "./index.md"
+  - Philosophies:
+      - Everything as Code: "./philosophies/everything-as-code.md"
+      - Linting and Formatting: "./philosophies/linting-and-formatting.md"
+      - Testing: "./philosophies/testing.md"
+      - Commit Messages: "./philosophies/commit-messages.md"
+      - Release Automation: "./philosophies/release-automation.md"
+      - Code Reviews: "./philosophies/code-reviews.md"
+      - CI/CD Pipelines: "./philosophies/ci-cd-pipelines.md"
+      - Monitoring: "./philosophies/monitoring.md"
+      - Blameless Post Mortem: "./philosophies/blameless-post-mortem.md"
+      - Documentation as Code: "././philosophies/documentation-as-code.md"
+
+...
