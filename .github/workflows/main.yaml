@@ -1,0 +1,68 @@
+---
+name: "Main"
+
+"on": "push"
+
+permissions:
+  contents: "write"
+  issues: "write"
+  pull-requests: "write"
+
+jobs:
+  pre-commit-job:
+    runs-on: "ubuntu-22.04"
+    steps:
+      - name: "Checkout repository"
+        uses: "actions/checkout@v3.5.3"
+      - name: "Set up python and pip cache"
+        uses: "actions/setup-python@v4.6.1"
+        with:
+          python-version: "3.11.4"
+          cache: "pip"
+      - name: "Install dependencies"
+        run: "pip install -r requirements.txt"
+      - name: "Set up pre-commit cache"
+        uses: "actions/cache@v3.3.1"
+        with:
+          path: "~/.cache/pre-commit"
+          key: "pre-commit|${{ env.pythonLocation }}|${{ hashFiles('.pre-commit-config.yaml') }}"
+      - name: "Run pre-commit"
+        run: "pre-commit run --all-files --color=always --show-diff-on-failure"
+
+  mkdocs-deploy-job:
+    if: "${{ github.ref == 'refs/heads/main' }}"
+    needs: "pre-commit-job"
+    runs-on: "ubuntu-22.04"
+    steps:
+      - name: "Checkout repository"
+        uses: "actions/checkout@v3.5.3"
+      - name: "Set up python and pip cache"
+        uses: "actions/setup-python@v4.6.1"
+        with:
+          python-version: "3.11.4"
+          cache: "pip"
+      - name: "Install dependencies"
+        run: "pip install -r requirements.txt"
+      - name: "Generate mkdocs cache id"
+        run: "echo \"cache_id=$(date --utc '+%V')\" >> $GITHUB_ENV"
+      - name: "Set up mkdocs cache"
+        uses: "actions/cache@v3.3.1"
+        with:
+          path: "~/.cache/"
+          key: "mkdocs-material-${{ env.cache_id }}"
+          restore-keys: |
+            mkdocs-material-
+      - name: "Deploy documentation"
+        run: "mkdocs gh-deploy --force"
+
+  release-job:
+    needs: "pre-commit-job"
+    runs-on: "ubuntu-22.04"
+    steps:
+      - name: "Checkout repository"
+        uses: "actions/checkout@v3.5.3"
+      - name: "Run semantic-release"
+        uses: "cycjimmy/semantic-release-action@v3.4.2"
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+...
