@@ -13,16 +13,16 @@ jobs:
     runs-on: "ubuntu-22.04"
     steps:
       - name: "Checkout repository"
-        uses: "actions/checkout@v3.5.3"
+        uses: "actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9" # v3.5.3
       - name: "Set up python and pip cache"
-        uses: "actions/setup-python@v4.6.1"
+        uses: "actions/setup-python@bd6b4b6205c4dbad673328db7b31b7fab9e241c0" # v4.6.1
         with:
           python-version: "3.11.4"
           cache: "pip"
       - name: "Install dependencies"
         run: "pip install -r requirements.txt"
       - name: "Set up pre-commit cache"
-        uses: "actions/cache@v3.3.1"
+        uses: "actions/cache@88522ab9f39a2ea568f7027eddc7d8d8bc9d59c8" # v3.3.1
         with:
           path: "~/.cache/pre-commit"
           key: "pre-commit|${{ env.pythonLocation }}|${{ hashFiles('.pre-commit-config.yaml') }}"
@@ -35,9 +35,9 @@ jobs:
     runs-on: "ubuntu-22.04"
     steps:
       - name: "Checkout repository"
-        uses: "actions/checkout@v3.5.3"
+        uses: "actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9" # v3.5.3
       - name: "Set up python and pip cache"
-        uses: "actions/setup-python@v4.6.1"
+        uses: "actions/setup-python@bd6b4b6205c4dbad673328db7b31b7fab9e241c0" # v4.6.1
         with:
           python-version: "3.11.4"
           cache: "pip"
@@ -46,7 +46,7 @@ jobs:
       - name: "Generate mkdocs cache id"
         run: "echo \"cache_id=$(date --utc '+%V')\" >> $GITHUB_ENV"
       - name: "Set up mkdocs cache"
-        uses: "actions/cache@v3.3.1"
+        uses: "actions/cache@88522ab9f39a2ea568f7027eddc7d8d8bc9d59c8" # v3.3.1
         with:
           path: "~/.cache/"
           key: "mkdocs-material-${{ env.cache_id }}"
@@ -60,9 +60,9 @@ jobs:
     runs-on: "ubuntu-22.04"
     steps:
       - name: "Checkout repository"
-        uses: "actions/checkout@v3.5.3"
+        uses: "actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9" # v3.5.3
       - name: "Run semantic-release"
-        uses: "cycjimmy/semantic-release-action@v3.4.2"
+        uses: "cycjimmy/semantic-release-action@8e58d20d0f6c8773181f43eb74d6a05e3099571d" # v3.4.2
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
 ...
