@@ -1,2 +1,2 @@
 pre-commit == v3.3.3
-mkdocs-material ==9.1.21
+mkdocs-material ==9.2.7
