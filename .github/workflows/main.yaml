@@ -22,7 +22,7 @@ jobs:
       - name: "Install dependencies"
         run: "pip install -r requirements.txt"
       - name: "Set up pre-commit cache"
-        uses: "actions/cache@v3.3.1"
+        uses: "actions/cache@v3.3.2"
         with:
           path: "~/.cache/pre-commit"
           key: "pre-commit|${{ env.pythonLocation }}|${{ hashFiles('.pre-commit-config.yaml') }}"
@@ -46,7 +46,7 @@ jobs:
       - name: "Generate mkdocs cache id"
         run: "echo \"cache_id=$(date --utc '+%V')\" >> $GITHUB_ENV"
       - name: "Set up mkdocs cache"
-        uses: "actions/cache@v3.3.1"
+        uses: "actions/cache@v3.3.2"
         with:
           path: "~/.cache/"
           key: "mkdocs-material-${{ env.cache_id }}"
