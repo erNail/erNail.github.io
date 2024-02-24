@@ -1,2 +1,2 @@
 pre-commit ==3.6.2
-mkdocs-material ==9.5.10
+mkdocs-material ==9.5.11
